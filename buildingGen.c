@@ -88,7 +88,7 @@ void freeFloor(Floor* floor){
     free(floor->map[row]);
   }
   free(floor->map);
-  free(floor);
+  //free(floor);
 }
 
 Building* generateBuilding(int width, int height, int levels){
@@ -124,7 +124,7 @@ int main(){
 
   int width = 5;
   int height = 5;
-  int levels = 2;
+  int levels = 4;
 
   //Initialize random number gen
   srand(time(NULL));
