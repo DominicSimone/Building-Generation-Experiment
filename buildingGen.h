@@ -5,7 +5,7 @@ typedef struct struct_Floor{
 } Floor;
 
 typedef struct struct_Building{
-  Floor* floors;
+  Floor** floors;
   int height;
 } Building;
 

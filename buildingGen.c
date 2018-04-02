@@ -68,14 +68,14 @@ void freeFloor(Floor* floor){
     free(floor->map[row]);
   }
   free(floor->map);
-  //free(floor);
+  free(floor);
 }
 
 Building* generateBuilding(int width, int height, int levels){
-  Floor* floors = malloc(sizeof(Floor) * levels);
-  floors[0] = *generateBase(width, height);
+  Floor** floors = malloc(sizeof(Floor*) * levels);
+  floors[0] = generateBase(width, height);
   for(int i = 1; i < levels; i++){
-    floors[i] = *generateFloorFromFloor(&floors[i-1]);
+    floors[i] = generateFloorFromFloor(floors[i-1]);
   } 
 
   Building* building = malloc(sizeof(Building));
@@ -87,14 +87,14 @@ Building* generateBuilding(int width, int height, int levels){
 
 void printBuilding(Building* building){
   for(int i = 0; i < building->height; i++){
-    printFloor(&building->floors[i]);
+    printFloor(building->floors[i]);
     printf("\n");
   }
 }
 
 void freeBuilding(Building* building){
   for(int i = 0; i < building->height; i++){
-    freeFloor(&building->floors[i]);
+    freeFloor(building->floors[i]);
   }
   free(building->floors);
   free(building);
