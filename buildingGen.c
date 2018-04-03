@@ -24,7 +24,6 @@ Floor* generateBase(int width, int height){
 }
 
 Floor* generateFloorFromFloor(Floor* prev){
-  
   int** map = malloc(sizeof(int*) * prev->width);
 
   for(int row = 0; row < prev->width; row++){
@@ -39,7 +38,6 @@ Floor* generateFloorFromFloor(Floor* prev){
     }
   }
   
-
   Floor* floor = makeFloor(prev->width, prev->height, map);
   return floor;
 }
@@ -85,9 +83,19 @@ Building* generateBuilding(int width, int height, int levels){
   return building;
 }
 
+//A more advanced version of the old print building, prints the whole building
+//left to right, like so
+//  0 0 1  0 0 0  0 0 0 
+//  0 1 1  0 1 1  0 1 0
+//  1 1 0  0 1 0  0 0 0
 void printBuilding(Building* building){
-  for(int i = 0; i < building->height; i++){
-    printFloor(building->floors[i]);
+  for(int x = 0; x < building->floors[0]->height; x++){
+    for(int i = 0; i < building->height; i++){
+      for(int j = 0; j < building->floors[0]->width; j++){
+        printf("%d ", building->floors[i]->map[j][x]);
+      }
+      printf("  ");
+    }
     printf("\n");
   }
 }
